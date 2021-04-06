@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #282828 !important;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  color: white;
+  padding: 3rem;
+}
+
+h3 {
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.container {
+  width: 70% !important;
+}
+
+.relative {
+  position: relative;
+  width: auto;
+}
+
+.row {
+  -webkit-box-pack: justify !important;
+  -ms-flex-pack: justify !important;
+  justify-content: space-between !important;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.row select {
+  padding: 1rem;
+  width: 400px;
+  outline: none;
+  cursor: pointer;
+}
+
+.row select ~ .border {
+  border: none !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #23d997 !important;
+}
+
+.row select:hover ~ .border {
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.row input {
+  padding: 1rem;
+  width: 400px;
+  outline: none;
+}
+
+.row input.small {
+  width: 80px;
+}
+
+.row input ~ .border {
+  border: none !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #23d997 !important;
+}
+
+.row input:hover ~ .border {
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.d-flex button {
+  padding: 1rem;
+  margin: 0rem 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: white;
+  background: #23d997;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+.d-flex button:hover {
+  border: 1px solid #23d997;
+  background: transparent;
+}
+/*# sourceMappingURL=styles.css.map */
