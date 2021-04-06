@@ -8,3 +8,5 @@ CREATE TABLE Ticket (
     num INTEGER NOT NULL,
     PRIMARY KEY (id)
 );
+
+

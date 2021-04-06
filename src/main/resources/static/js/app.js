@@ -1,3 +1,4 @@
+// TEST
 const regTickets = (e) => {
   e.preventDefault();
   const customer = {
