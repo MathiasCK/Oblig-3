@@ -1,6 +1,5 @@
 # oblig-3
 
-oblig-1-MathiasCK created by GitHub Classroom
 
 Studentnr: S354411
 
