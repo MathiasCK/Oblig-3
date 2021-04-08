@@ -18,7 +18,7 @@ public class ArrayRepository {
     }
 
     public List<Ticket> getAllTickets(){
-        String sql = "SELECT * FROM Ticket";
+        String sql = "SELECT * FROM Ticket ORDER BY lName";
         List<Ticket> allTickets = db.query(sql, new BeanPropertyRowMapper(Ticket.class));
         return allTickets;
     }
