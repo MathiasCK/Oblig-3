@@ -17,7 +17,7 @@ const regTickets = (e) => {
       alert("Success");
     })
     .fail(function () {
-      alert("error");
+      alert("Feil på server, prøv igjen senere");
     });
 
   $("#movie").val("");
@@ -31,7 +31,13 @@ const regTickets = (e) => {
 const getAll = () => {
   $.get("/tickets", function (data) {
     formatData(data);
-  });
+  })
+    .done(function () {
+      alert("Success");
+    })
+    .fail(function () {
+      alert("Feil på server, prøv igjen senere");
+    });
 };
 
 const formatData = (customers) => {
