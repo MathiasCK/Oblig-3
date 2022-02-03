@@ -1,48 +1,43 @@
-// TEST
-const regTickets = (e) => {
+const movie = document.getElementById('movie');
+const fName = document.getElementById('fName');
+const lName = document.getElementById('lName');
+const mail = document.getElementById('mail');
+const tel = document.getElementById('tel');
+const num = document.getElementById('num');
+
+const regTickets = async e => {
   e.preventDefault();
-  const customer = {
-    movie: $("#movie").val(),
-    fName: $("#fName").val(),
-    lName: $("#lName").val(),
-    num: $("#num").val(),
-    tel: $("#tel").val(),
-    mail: $("#mail").val(),
+  const ticket = {
+    movie: movie.value,
+    fName: fName.value,
+    lName: lName.value,
+    mail: mail.value,
+    tel: tel.value,
+    num: num.value,
   };
-  const url = "/save";
-  $.post(url, customer, function () {
-    getAll();
-  })
-    .done(function () {
-      alert("Success");
-    })
-    .fail(function () {
-      alert("Feil på server, prøv igjen senere");
-    });
 
-  $("#movie").val("");
-  $("#fName").val("");
-  $("#lName").val("");
-  $("#num").val("");
-  $("#tel").val("");
-  $("#mail").val("");
+  await fetch('/api/save', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(ticket),
+  });
+
+  form.reset();
+
+  await getAll();
 };
 
-const getAll = () => {
-  $.get("/tickets", function (data) {
-    formatData(data);
-  })
-    .done(function () {
-      alert("Success");
-    })
-    .fail(function () {
-      alert("Feil på server, prøv igjen senere");
-    });
+const getAll = async () => {
+  const response = await fetch('/api/tickets');
+  const data = await response.json();
+  formatData(data);
 };
 
-const formatData = (customers) => {
-  console.log(customers);
-  message.innerHTML = "";
+const formatData = customers => {
+  message.innerHTML = '';
   for (const customer of customers) {
     message.innerHTML += /*html*/ `
       <div style="margin: 1rem 0;">
@@ -57,17 +52,20 @@ const formatData = (customers) => {
   }
 };
 
-const delTickets = () => {
+const delTickets = async () => {
   form.reset();
-  message.innerHTML = "";
-  $.get("/delete", function () {
-    getAll();
-  }).done(function () {
-    alert("Deleted");
+  await fetch('/api/delete', {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
   });
+  await getAll();
+  message.innerHTML = '';
 };
 
-const message = document.getElementById("output");
-const form = document.querySelector("form");
-form.addEventListener("submit", regTickets);
-form.addEventListener("reset", delTickets);
+const message = document.getElementById('output');
+const form = document.querySelector('form');
+form.addEventListener('submit', regTickets);
+form.addEventListener('reset', delTickets);
