@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +17,6 @@ import java.util.List;
 @RestController
 public class ArrayController {
     
-    //private final List<Ticket> movieList = new ArrayList<>();
     @Autowired
     private ArrayRepository rep;
 
@@ -32,11 +33,18 @@ public class ArrayController {
 
     @GetMapping("/tickets")
     public List<Ticket> getAll(){
-        return rep.getAllTickets();
+        
+            return rep.getAllTickets();
+        
     }
 
     @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public void delete() {
+    public ResponseEntity<HttpStatus> delete() {
+       try {
         rep.deleteAllTickets();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      } catch (Exception e) {
+       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
     }
 }

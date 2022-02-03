@@ -7,27 +7,39 @@ const num = document.getElementById('num');
 
 const regTickets = async e => {
   e.preventDefault();
-  const ticket = {
-    movie: movie.value,
-    fName: fName.value,
-    lName: lName.value,
-    mail: mail.value,
-    tel: tel.value,
-    num: num.value,
-  };
+  try {
+    const ticket = {
+      movie: movie.value,
+      fName: fName.value,
+      lName: lName.value,
+      mail: mail.value,
+      tel: tel.value,
+      num: num.value,
+    };
 
-  await fetch('/api/save', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(ticket),
-  });
+    await fetch('/api/save', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ticket),
+    });
 
-  form.reset();
+    await getAll();
+    resetValues();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  await getAll();
+const resetValues = () => {
+  movie.value = '';
+  fName.value = '';
+  lName.value = '';
+  mail.value = '';
+  tel.value = '';
+  num.value = '';
 };
 
 const getAll = async () => {
