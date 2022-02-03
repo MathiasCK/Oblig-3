@@ -33,23 +33,18 @@ const regTickets = async e => {
   }
 };
 
-const resetValues = () => {
-  movie.value = '';
-  fName.value = '';
-  lName.value = '';
-  mail.value = '';
-  tel.value = '';
-  num.value = '';
-};
-
 const getAll = async () => {
-  const response = await fetch('/api/tickets');
-  const data = await response.json();
-  formatData(data);
+  try {
+    const response = await fetch('/api/tickets');
+    const data = await response.json();
+    formatData(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const formatData = customers => {
-  message.innerHTML = '';
+  resetMessage();
   for (const customer of customers) {
     message.innerHTML += /*html*/ `
       <div style="margin: 1rem 0;">
@@ -65,17 +60,32 @@ const formatData = customers => {
 };
 
 const delTickets = async () => {
-  form.reset();
-  await fetch('/api/delete', {
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
-  await getAll();
-  message.innerHTML = '';
+  try {
+    await fetch('/api/delete', {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    await getAll();
+    resetMessage();
+    resetValues();
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+const resetValues = () => {
+  movie.value = '';
+  fName.value = '';
+  lName.value = '';
+  mail.value = '';
+  tel.value = '';
+  num.value = '';
+};
+
+const resetMessage = () => (message.innerHTML = '');
 
 const message = document.getElementById('output');
 const form = document.querySelector('form');
